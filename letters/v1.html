@@ -257,6 +257,7 @@ button {
     </div>
 </div>
 
+<!-- JavaScript for Reply Form -->
 <script>
     function openReplyForm() {
         document.getElementById('replyFormPopup').style.display = 'block';
@@ -267,25 +268,27 @@ button {
     }
 
     document.getElementById('replyForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); // Prevent the form from submitting the traditional way
         var form = event.target;
         var formData = new FormData(form);
 
-        fetch(form.action, {
-            method: form.method,
+        fetch('https://formspree.io/f/mjvqobge', {
+            method: 'POST',
             body: formData,
             headers: {
                 'Accept': 'application/json'
             }
         }).then(function(response) {
             if (response.ok) {
-                form.style.display = 'none';
-                document.getElementById('confirmationMessage').style.display = 'block';
+                document.getElementById('confirmationMessage').textContent = 'Your message has been sent.';
             } else {
-                alert('There was a problem sending your message. Please try again.');
+                document.getElementById('confirmationMessage').textContent = 'There was a problem sending your message. Please try again.';
             }
+            document.getElementById('confirmationMessage').style.display = 'block';
+            form.style.display = 'none';
         }).catch(function(error) {
-            alert('There was an error sending your message. Please try again.');
+            document.getElementById('confirmationMessage').textContent = 'There was an error sending your message. Please try again.';
+            document.getElementById('confirmationMessage').style.display = 'block';
         });
     });
 </script>
