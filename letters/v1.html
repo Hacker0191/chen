@@ -15,47 +15,23 @@ body, html {
 
 .background-image {
     background-image: url('../assets/images/page.jpg'); /* Add your background image path here */
-    background-size: cover;
+    background-size: contain; /* Show the full image without cutting it */
     background-position: center;
+    background-repeat: no-repeat; /* Prevent the background from repeating */
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.letter {
-   
-    padding: 40px;
-    border-radius: 10px;
-    max-width: 80%;
-    position: relative;
-}
-
-.header {
-    text-align: right;
-    margin-bottom: 20px;
+    position: relative; /* Allows for positioning of the date */
 }
 
 .date {
+    position: absolute;
+    top: 10px;
+    right: 20px;
     font-size: 14px;
 }
 
-.content {
-    text-align: justify;
-}
-
-h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.typing-animation::after {
-    content: '|';
-    animation: blink-caret 0.75s infinite;
-    position: relative;
-    top: -0.1em;
-    margin-left: 0.1em;
-}
 
 .popup {
     display: none;
@@ -220,18 +196,10 @@ button {
   
 
     <div class="background-image">
-        <div class="letter">
-            <div class="header">
                 <span class="date" class="date-container" id="date-container"></span>
-            </div>
-            <div class="content">
-                
-                <p id="typed-text" class="typing-animation"></p>
-            </div>
-        </div>
     </div>
 
-    <audio id="background-audio" src="../assets/audios/end-of-beginning.mp3" loop></audio>
+    <audio id="background-audio" src="../assets/audios/greedy.mp3" loop></audio>
     <div class="controls" id="controls">
         <p>Click to enable audio</p>
         <button onclick="enableAudio()">Play Audio</button>
@@ -323,102 +291,6 @@ const audio = document.getElementById('background-audio');
                 controls.style.display = 'block'; // Show the controls if autoplay is prevented
             });
         });
-
-// Function to type text with realistic features
-function typeText(text, element) {
-    let index = 0;
-
-    function type() {
-        if (index < text.length) {
-            const char = text.charAt(index);
-            element.innerHTML += char;
-            if (char === '<') {
-                const endIndex = text.indexOf('>', index);
-                index = endIndex + 1;
-            } else {
-                index++;
-            }
-            setTimeout(type, getTypingSpeed(char)); // Adjust typing speed here (in milliseconds)
-        }
-    }
-
-    function getTypingSpeed(char) {
-        const typingSpeed = Math.random() * 50 + 25; // Random typing speed between 25ms and 75ms
-        if (char === ' ') {
-            return typingSpeed * 0.5; // Double speed for spaces
-        } else if (char === ',') {
-            return typingSpeed * 2; // Slower speed for commas
-        } else if (char === '.') {
-            return typingSpeed * 3; // Even slower speed for periods
-        } else if (char === '<') {
-            return 0; // No delay for opening tags
-        } else {
-            return typingSpeed;
-        }
-    }
-
-    // Start typing animation
-    type();
-}
-
-// Function to open the feedback popup
-function openPopup() {
-    const popup = document.getElementById('feedback-popup');
-    if (popup) {
-        popup.style.display = 'flex';
-    }
-}
-
-// Function to close the feedback popup
-function closePopup() {
-    const popup = document.getElementById('feedback-popup');
-    if (popup) {
-        popup.style.display = 'none';
-    }
-}
-
-// Function to handle feedback submission
-function submitFeedback() {
-    const feedbackTextarea = document.getElementById('feedback-textarea');
-    if (feedbackTextarea) {
-        const feedback = feedbackTextarea.value;
-        // Handle feedback submission (e.g., send to server, store locally, etc.)
-        console.log("Feedback submitted:", feedback);
-        // Close the popup after submission
-        closePopup();
-        // Clear the feedback textarea
-        feedbackTextarea.value = '';
-    }
-}
-
-// Add event listener to the feedback link to open the popup
-document.addEventListener('DOMContentLoaded', function() {
-    const feedbackLink = document.getElementById('feedback-link');
-    if (feedbackLink) {
-        feedbackLink.addEventListener('click', openPopup);
-    }
-
-    // Add event listener to the close button in the popup
-    const closeButton = document.querySelector('#feedback-popup .close');
-    if (closeButton) {
-        closeButton.addEventListener('click', closePopup);
-    }
-
-    // Add event listener to the submit button in the popup
-    const submitButton = document.querySelector('#feedback-popup button');
-    if (submitButton) {
-        submitButton.addEventListener('click', submitFeedback);
-    }
-
-    // Type the text with realistic features
-    const text = "Dear Stephanie, I hope you're well. I wanted to check in and see how you're feeling about everything. Did you enjoy what I shared with you? I put a lot of effort into it, and I really hope it brought a smile to your face. Sometimes, after working hard on something, I find myself unsure of what to say next. It's like all the words have been used up! But then I remember that what's important is how you feel about it. So, do you like it? Your thoughts mean a lot to me. Warm regards, Mayank";
-    const typedTextElement = document.getElementById('typed-text');
-    if (typedTextElement) {
-        typeText(text, typedTextElement);
-    }
-});
-
-
     </script>
 
 </body>
