@@ -15,15 +15,28 @@
             align-items: center;
         }
         .letter {
-            background-color: rgba(255, 255, 255, 0.911);
-            color: black;
-            max-width: 600px;
-            width: 90%;
-            padding: 2rem;
-            box-sizing: border-box;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
+    background-color: rgba(255, 255, 255, 0.911);
+    color: black;
+    max-width: 600px;
+    width: 90%;
+    padding: 2rem;
+    box-sizing: border-box;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    overflow-y: auto; /* Makes the letter scrollable */
+    max-height: 70vh; /* Adjust height as needed */
+}
+
+.images {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.images img {
+    width: 48%; /* Adjust width to fit images within the container */
+    border-radius: 5px; /* Optional: add border radius for styling */
+}
         p {
             font-size: 1.2rem;
             line-height: 1.6;
@@ -92,8 +105,12 @@
     <div class="letter">
         <p>Dear Maia,</p>
         <p>I hope you’re doing alright. It’s been a minute, and I was just wondering how things have been going on your end. I know life keeps us all busy, so no pressure or anything, I just figured I’d check in. It’s funny how time passes, right? One day we’re talking all the time, and the next, we’re just kind of doing our own thing. It’s all good though, I think that’s just how life works sometimes. Anyway, no big updates on my side, just the usual stuff. What about you? </p>
-        <p class="signature">Take Care, Mayank</p>
-        <button onclick="openModal()">Reply</button>
+        <div class="images">
+        <img src="https://i.ibb.co/dJRrnLC/Supermoon-Nov-14-2016-minneapolis.jpg" alt="Image 1">
+        <img src="https://i.ibb.co/M9TfQ3b/Full-Moon2010.jpg" alt="Image 2">
+    </div>
+    <p class="signature">Take Care, Mayank</p>
+    <button onclick="openModal()">Reply</button>
     </div>
 
     <div id="replyModal" class="modal">
