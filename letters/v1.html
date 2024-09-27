@@ -5,81 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Letter For You</title>
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .letter {
-    background-color: rgba(255, 255, 255, 0.911);
-    color: black;
-    max-width: 600px;
-    width: 90%;
-    box-sizing: border-box;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    max-height: 650px; /* Adjust this height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */
-        }
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        
-        button {
-            background-color: rgb(0, 0, 0);
-            color: rgb(255, 255, 255);
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: opacity 0.3s;
-            display: block;
-            margin-top: 2rem;
+    .letter {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.911);
+        color: black;
+        max-width: 100vw;
+        max-height: 100vh;
+        box-sizing: border-box;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+        background-color: rgba(255, 255, 255, 0.541);
+        color: white;
+        margin: 10% auto;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        box-sizing: border-box;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+    }
+
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: rgb(255, 255, 255);
+        border: none;
+        color: black;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+</style>
+
+<script>
+    document.querySelector('img').addEventListener('click', function () {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
         }
-        button:hover {
-            opacity: 0.8;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-        }
-        .modal-content {
-            background-color: rgba(255, 255, 255, 0.541);
-            color: white;
-            margin: 10% auto;
-            padding: 2rem;
-            max-width: 400px;
-            width: 90%;
-            box-sizing: border-box;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        .close {
-            color: white;
-            float: right;
-            font-size: 28px;
-            cursor: pointer;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            background-color: rgb(255, 255, 255);
-            border: none;
-            color: black; /* Changed text color to black */
-            box-sizing: border-box;
-            border-radius: 5px;
-        }
-    </style>
+    });
+
+    function openModal() {
+        document.getElementById("replyModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("replyModal").style.display = "none";
+    }
+</script>
+    
     
 </head>
 <body>
